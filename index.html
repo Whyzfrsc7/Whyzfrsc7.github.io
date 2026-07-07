@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryouta | Personal Space</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Personal space of Ryouta. Connect with me on social media.">
+  <meta name="keywords" content="Ryouta, Portfolio, Links in Bio, Developer, Designer">
+  <meta name="author" content="Ryouta">
+  
+  <!-- Google Fonts: Outfit (Heading) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- FontAwesome 6 for perfect official brand icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            dark: {
+              950: '#01030f', // Extra deep blue-black
+              900: '#03071e', // Dark navy
+              800: '#070e2b', // Card backgrounds
+              700: '#0c173d',
+            },
+            brand: {
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'stars-drift': 'starsDrift 100s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            starsDrift: {
+              '0%': { 'background-position': '0px 0px' },
+              '100%': { 'background-position': '1000px 1000px' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/css">
+    html {
+      scroll-behavior: auto;
+    }
+    /* Hide native cursor on desktop */
+    @media (min-width: 768px) {
+      html, body, a, button, [role="button"], i, svg, span {
+        cursor: none !important;
+      }
+    }
+    /* Lenis Smooth Scroll Styles */
+    html.lenis {
+      height: auto;
+    }
+    .lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis-stopped {
+      overflow: hidden;
+    }
+    /* Navigation link active states */
+    .nav-link {
+      color: #94a3b8; /* text-slate-400 */
+      background-color: transparent;
+      transition: all 0.2s ease-in-out;
+    }
+    .nav-link:hover {
+      color: #f1f5f9; /* text-slate-100 */
+    }
+    .nav-link.active {
+      color: #60a5fa !important; /* text-brand-400 */
+      background-color: rgba(59, 130, 246, 0.1) !important; /* bg-brand-500/10 */
+    }
+    .nav-link.active:hover {
+      color: #93c5fd !important; /* text-brand-300 */
+    }
+    /* Glassmorphism Styles */
+    .glass-nav {
+      background: rgba(1, 3, 15, 0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.65),
+                  0 0 40px rgba(59, 130, 246, 0.15);
+    }
+    
+    .glass-card {
+      background: rgba(1, 3, 15, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(1, 3, 15, 0.7);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.75),
+                  0 0 50px rgba(59, 130, 246, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transform: translateY(-6px);
+    }
+
+    /* Scroll reveal transitions */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .active .stagger-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .active .delay-1 { transition-delay: 150ms; }
+    .active .delay-2 { transition-delay: 300ms; }
+    .active .delay-3 { transition-delay: 450ms; }
+    .active .delay-4 { transition-delay: 600ms; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #01030f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.35);
+      border-radius: 99px;
+      border: 3px solid #01030f;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.55);
+    }
+  </style>
+</head>
+<body class="bg-dark-950 text-slate-200 font-sans antialiased overflow-x-hidden min-h-screen">
+
+  <!-- ================= BACKGROUND ================= -->
+  <!-- Fixed GIF Background -->
+  <div 
+    id="bg-gif" 
+    class="fixed inset-0 z-0 bg-repeat bg-center animate-stars-drift" 
+    style="
+      background-image: url('https://raw.githubusercontent.com/mananpreet/Backgrounds/master/starfield.gif');
+      background-size: 400px 400px;
+    "
+  ></div>
+
+  <!-- Deep Blue Minimalist Overlay (Darkens background to make content pop) -->
+  <div class="fixed inset-0 z-10 bg-gradient-to-b from-dark-950/92 via-dark-900/85 to-dark-950/92 backdrop-blur-[0.5px]"></div>
+
+  <!-- Glowing Accent Orbs (Massive ambient light fields) -->
+  <div class="fixed inset-0 z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-[10%] left-[5%] w-[800px] h-[800px] rounded-full bg-blue-600/10 blur-[180px] animate-pulse-slow"></div>
+    <div class="absolute bottom-[10%] right-[5%] w-[900px] h-[900px] rounded-full bg-indigo-500/5 blur-[220px] animate-float"></div>
+  </div>
+
+  <!-- ================= NAV BAR (Pill, Dark Liquid Glass, 25% from screen edges) ================= -->
+  <header class="fixed top-8 left-0 right-0 z-50 px-4 pointer-events-none">
+    <!-- Centered navbar pill (Comfortable width, 55% on PC, 88% on Mobile, capped at 850px) -->
+    <nav class="glass-nav pointer-events-auto mx-auto w-[88%] md:w-[55%] max-w-[850px] rounded-full py-4 px-8 flex items-center justify-between transition-all">
+      <!-- Minimalist Logo -->
+      <a href="#home" class="flex items-center gap-3 group pl-1">
+        <!-- Glowing tiny navbar pfp -->
+        <div class="relative w-8 h-8 rounded-full overflow-hidden border border-white/10 group-hover:border-brand-500/50 shadow-[0_0_10px_rgba(59,130,246,0.2)] transition-all">
+          <img 
+            id="navbar-pfp" 
+            src="pfp_placeholder.jpg" 
+            alt="Navbar Avatar" 
+            class="w-full h-full object-cover rounded-full"
+          >
+        </div>
+        <span class="font-heading font-bold text-base tracking-wide text-slate-200">Ryouta</span>
+      </a>
+
+      <!-- Menu links -->
+      <div class="flex items-center gap-2.5">
+        <a href="#home" data-link="home" class="nav-link px-5 py-2.5 rounded-full text-xs md:text-base font-bold transition-all active">Home</a>
+        <a href="#about" data-link="about" class="nav-link px-5 py-2.5 rounded-full text-xs md:text-base font-bold transition-all">About Me</a>
+        <a href="#socials" data-link="socials" class="nav-link px-5 py-2.5 rounded-full text-xs md:text-base font-bold transition-all">My Socials</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= SECTIONS CONTAINER (Wider and larger: max-w-5xl / 1024px) ================= -->
+  <main class="relative z-20 w-full flex flex-col items-center justify-start pt-52 pb-32 px-6 space-y-44 md:space-y-56">
+
+    <!-- ================= SECTION 1: HOME (Greeting & Discord Avatar) ================= -->
+    <section id="home" class="reveal flex flex-col items-center justify-center text-center w-full max-w-5xl py-16 scroll-mt-36">
+      
+      <!-- PFP Circle with Glow Status (Massive size: w-48 / w-56) -->
+      <div class="relative mb-10 stagger-item">
+        <div class="absolute -inset-3.5 rounded-full bg-brand-500/25 blur-2xl animate-pulse"></div>
+        <div class="relative w-44 h-44 md:w-56 md:h-56 rounded-full p-[5px] bg-slate-900 border border-white/10 overflow-hidden shadow-2xl">
+          <img 
+            id="discord-pfp" 
+            src="pfp_placeholder.jpg" 
+            alt="Profile Avatar" 
+            class="w-full h-full object-cover rounded-full transition-transform duration-500 hover:scale-105"
+          >
+        </div>
+        <!-- Status dot (Massive size) -->
+        <span 
+          id="status-dot" 
+          class="absolute bottom-4 right-4 w-9 h-9 rounded-full border-[5px] border-dark-950 bg-slate-500 shadow-[0_0_15px_rgba(0,0,0,0.6)] transition-all duration-300"
+        ></span>
+
+        <!-- Live Custom Status Speech Bubble Wrapper -->
+        <div id="custom-status-bubble" class="hidden absolute z-30 
+                    bottom-[108%] left-1/2 -translate-x-1/2
+                    md:bottom-auto md:top-[20%] md:left-[102%] md:translate-x-0
+                    transition-all duration-300">
+          <!-- Floating Animated Bubble Card -->
+          <div class="relative px-5 py-3 rounded-2xl backdrop-blur-md bg-slate-950/80 border border-white/10 text-xs md:text-sm text-slate-200 shadow-2xl min-w-[120px] max-w-[200px] sm:max-w-[260px] text-left animate-float">
+            <!-- Speech Bubble Arrow -->
+            <div class="absolute w-3 h-3 bg-slate-950 border-white/10 rotate-45 
+                        bottom-[-6.5px] left-1/2 -translate-x-1/2 border-r border-b
+                        md:top-1/2 md:bottom-auto md:-left-1.5 md:-translate-y-1/2 md:border-l md:border-b md:border-r-0 md:border-t-0 md:translate-x-0">
+            </div>
+            <span id="custom-status-text" class="flex items-center gap-2"></span>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="stagger-item font-heading text-6xl md:text-8xl font-black tracking-tight mb-6 text-slate-100 leading-none">
+        <span class="bg-gradient-to-r from-white via-slate-100 to-blue-300 bg-clip-text text-transparent">Ryouta</span>
+      </h1>
+
+      <p class="stagger-item delay-1 text-lg md:text-2xl text-slate-350 max-w-3xl mb-10 leading-relaxed font-light">
+        just ordinary person, no one can judge except god
+      </p>
+
+      <!-- Live Discord Activity Pill (Spotify / Gaming) -->
+      <div id="discord-badge" class="stagger-item delay-2 hidden transition-all duration-500">
+        <!-- Loaded dynamically with JS -->
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION 2: ABOUT ME ================= -->
+    <section id="about" class="reveal w-full max-w-5xl scroll-mt-36">
+      <div class="glass-card rounded-[32px] p-12 md:p-16 relative overflow-hidden">
+        <!-- Subtle Glow Orb in corner -->
+        <div class="absolute -top-20 -right-20 w-44 h-44 bg-brand-500/10 rounded-full blur-3xl"></div>
+        
+        <!-- Section title (Larger) -->
+        <div class="flex items-center gap-5 mb-10 stagger-item">
+          <h2 class="font-heading text-3xl md:text-4xl font-black text-slate-100">About Me</h2>
+        </div>
+
+        <!-- Description text (Copied from Discord Bio) -->
+        <div id="about-text" class="text-base md:text-lg text-slate-300 leading-relaxed font-light stagger-item delay-1 whitespace-pre-line text-left space-y-2">
+          <p>NR: <a href="https://discord.gg/nightraid" target="_blank" class="text-brand-400 hover:text-brand-300 hover:underline transition-colors font-medium">https://discord.gg/nightraid</a></p>
+          <p>Ready Joki Quest Discord, All Quest 5k, Except Video</p>
+          <p class="break-all"><a href="https://music.apple.com/id/playlist/i-hope-someone-help-me/pl.u-XkD0vILU2WWrDZN" target="_blank" class="text-brand-400 hover:text-brand-300 hover:underline transition-colors font-medium">https://music.apple.com/id/playlist/i-hope-someone-help-me/...</a></p>
+          <p><a href="https://drift.rip/yuu" target="_blank" class="text-brand-400 hover:text-brand-300 hover:underline transition-colors font-medium">https://drift.rip/yuu</a></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: SOCIAL MEDIA ================= -->
+    <section id="socials" class="reveal w-full max-w-5xl scroll-mt-36">
+      <!-- Section header -->
+      <div class="flex flex-col items-center mb-14 text-center stagger-item">
+        <div class="p-4 rounded-full bg-brand-500/10 border border-brand-500/25 text-brand-400 mb-5 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+          <i data-lucide="share-2" class="w-7 h-7"></i>
+        </div>
+        <h2 class="font-heading text-3xl md:text-4xl font-black text-slate-100 mb-2">Connect with Me</h2>
+        <p class="text-base md:text-lg text-slate-400">Find me on my social media platforms</p>
+      </div>
+
+      <!-- Socials Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger-item delay-1">
+        
+        <!-- Instagram -->
+        <a href="https://instagram.com/dwywrdn_" target="_blank" class="glass-card group flex items-center justify-between p-8 rounded-[28px] border border-white/5 hover:border-brand-500/30 hover:shadow-[0_0_35px_rgba(59,130,246,0.18)] transition-all">
+          <div class="flex items-center gap-6">
+            <div class="p-4.5 rounded-2xl bg-white/5 border border-white/5 transition-all group-hover:bg-white/10 group-hover:border-white/20 w-16 h-16 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-instagram text-3xl md:text-4xl text-white"></i>
+            </div>
+            <div>
+              <span class="block text-base md:text-lg font-bold text-slate-200 group-hover:text-slate-100 transition-colors">Instagram</span>
+              <span class="block text-xs md:text-base text-slate-500 group-hover:text-brand-400 transition-colors">@dwywrdn_</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="w-6 h-6 text-slate-500 group-hover:text-brand-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+        </a>
+
+        <!-- Discord -->
+        <a href="https://discord.com/users/1464100187424428075" target="_blank" class="glass-card group flex items-center justify-between p-8 rounded-[28px] border border-white/5 hover:border-brand-500/30 hover:shadow-[0_0_35px_rgba(59,130,246,0.18)] transition-all">
+          <div class="flex items-center gap-6">
+            <div class="p-4.5 rounded-2xl bg-white/5 border border-white/5 transition-all group-hover:bg-white/10 group-hover:border-white/20 w-16 h-16 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-discord text-3xl md:text-4xl text-white"></i>
+            </div>
+            <div>
+              <span class="block text-base md:text-lg font-bold text-slate-200 group-hover:text-slate-100 transition-colors">Discord</span>
+              <span id="discord-tag" class="block text-xs md:text-base text-slate-500 group-hover:text-brand-400 transition-colors">wahyu</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="w-6 h-6 text-slate-500 group-hover:text-brand-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/Whyzfrsc7" target="_blank" class="glass-card group flex items-center justify-between p-8 rounded-[28px] border border-white/5 hover:border-brand-500/30 hover:shadow-[0_0_35px_rgba(59,130,246,0.18)] transition-all">
+          <div class="flex items-center gap-6">
+            <div class="p-4.5 rounded-2xl bg-white/5 border border-white/5 transition-all group-hover:bg-white/10 group-hover:border-white/20 w-16 h-16 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-github text-3xl md:text-4xl text-white"></i>
+            </div>
+            <div>
+              <span class="block text-base md:text-lg font-bold text-slate-200 group-hover:text-slate-100 transition-colors">GitHub</span>
+              <span class="block text-xs md:text-base text-slate-500 group-hover:text-brand-400 transition-colors">github.com/Whyzfrsc7</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="w-6 h-6 text-slate-500 group-hover:text-brand-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+        </a>
+
+        <!-- Steam -->
+        <a href="https://steamcommunity.com/id/nstlemilo" target="_blank" class="glass-card group flex items-center justify-between p-8 rounded-[28px] border border-white/5 hover:border-brand-500/30 hover:shadow-[0_0_35px_rgba(59,130,246,0.18)] transition-all">
+          <div class="flex items-center gap-6">
+            <div class="p-4.5 rounded-2xl bg-white/5 border border-white/5 transition-all group-hover:bg-white/10 group-hover:border-white/20 w-16 h-16 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-steam text-3xl md:text-4xl text-white"></i>
+            </div>
+            <div>
+              <span class="block text-base md:text-lg font-bold text-slate-200 group-hover:text-slate-100 transition-colors">Steam</span>
+              <span class="block text-xs md:text-base text-slate-500 group-hover:text-brand-400 transition-colors">nstlemilo</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="w-6 h-6 text-slate-500 group-hover:text-brand-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="relative z-20 text-center w-full max-w-5xl pt-8 border-t border-white/5 text-sm md:text-base text-slate-500">
+      <p>© 2026 Ryouta. Built with simplicity.</p>
+    </footer>
+
+  </main>
+
+  <!-- Glowing Crosshair Cursor HTML -->
+  <div id="custom-cursor" class="fixed pointer-events-none z-[9999] w-6 h-6 -translate-x-1/2 -translate-y-1/2 mix-blend-screen hidden md:block" style="top: 0; left: 0;">
+    <!-- Horizontal Line -->
+    <div class="absolute top-1/2 left-0 w-6 h-[1.5px] bg-brand-400 shadow-[0_0_8px_#3b82f6] -translate-y-1/2 transition-colors duration-300"></div>
+    <!-- Vertical Line -->
+    <div class="absolute left-1/2 top-0 h-6 w-[1.5px] bg-brand-400 shadow-[0_0_8px_#3b82f6] -translate-x-1/2 transition-colors duration-300"></div>
+    <!-- Center Dot -->
+    <div class="absolute top-1/2 left-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#3b82f6] -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // ================= DISCORD SETTINGS =================
+    // Hardcoded Discord User ID directly linked
+    const DISCORD_USER_ID = "1464100187424428075"; 
+
+    // Cache elements
+    const pfpEl = document.getElementById("discord-pfp");
+    const navPfpEl = document.getElementById("navbar-pfp");
+    const statusDotEl = document.getElementById("status-dot");
+    const badgeEl = document.getElementById("discord-badge");
+    const discordTagEl = document.getElementById("discord-tag");
+    const aboutTextEl = document.getElementById("about-text");
+
+    // Fetch Presence from Lanyard API
+    async function getDiscordPresence() {
+      try {
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+          const info = data.data;
+          const user = info.discord_user;
+          
+          // Set Tag
+          discordTagEl.textContent = user.discriminator && user.discriminator !== "0" 
+            ? `${user.username}#${user.discriminator}` 
+            : user.username;
+          
+          // Set Avatar
+          if (user.avatar) {
+            const format = user.avatar.startsWith("a_") ? "gif" : "webp";
+            const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${format}?size=256`;
+            pfpEl.src = avatarUrl;
+            if (navPfpEl) navPfpEl.src = avatarUrl;
+          } else {
+            pfpEl.src = "pfp_placeholder.jpg";
+            if (navPfpEl) navPfpEl.src = "pfp_placeholder.jpg";
+          }
+          
+          // Status Glow Indicator
+          const status = info.discord_status;
+          statusDotEl.className = "absolute bottom-4 right-4 w-9 h-9 rounded-full border-[5px] border-dark-950 transition-all duration-300";
+          
+          if (status === "online") {
+            statusDotEl.classList.add("bg-emerald-500");
+          } else if (status === "idle") {
+            statusDotEl.classList.add("bg-amber-500");
+          } else if (status === "dnd") {
+            statusDotEl.classList.add("bg-rose-500");
+          } else {
+            statusDotEl.classList.add("bg-slate-500");
+          }
+
+          // Set Custom Status Bubble
+          const customStatusBubble = document.getElementById("custom-status-bubble");
+          const customStatusText = document.getElementById("custom-status-text");
+          
+          if (customStatusBubble && customStatusText) {
+            const customStatus = info.activities.find(act => act.type === 4);
+            if (customStatus && (customStatus.state || customStatus.emoji)) {
+              let emojiHtml = "";
+              if (customStatus.emoji) {
+                if (customStatus.emoji.id) {
+                  // Custom Discord Nitro emoji
+                  emojiHtml = `<img src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.webp?size=44&quality=lossless" class="w-5 h-5 inline-block shrink-0" alt="${customStatus.emoji.name}">`;
+                } else if (customStatus.emoji.name) {
+                  // Standard unicode emoji
+                  emojiHtml = `<span class="text-base leading-none">${customStatus.emoji.name}</span>`;
+                }
+              }
+              const statusText = customStatus.state || "";
+              customStatusText.innerHTML = `${emojiHtml}<span>${statusText}</span>`;
+              customStatusBubble.classList.remove("hidden");
+            } else {
+              customStatusBubble.classList.add("hidden");
+            }
+          }
+
+          // Render live status subtext pill
+          renderBadge(info);
+        }
+      } catch (err) {
+        console.error("Lanyard fetch failed: ", err);
+      }
+    }
+
+    function renderBadge(info) {
+      badgeEl.innerHTML = "";
+      badgeEl.classList.add("hidden");
+
+      // Spotify Player
+      if (info.listening_to_spotify && info.spotify) {
+        const spot = info.spotify;
+        badgeEl.innerHTML = `
+          <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs md:text-base text-emerald-400 font-bold shadow-[0_0_20px_rgba(16,185,129,0.08)]">
+            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Listening to <strong>${spot.track}</strong> by ${spot.artist}</span>
+          </div>
+        `;
+        badgeEl.classList.remove("hidden");
+        return;
+      }
+
+      // Game Activity
+      const activities = info.activities.filter(act => act.type === 0);
+      if (activities.length > 0) {
+        badgeEl.innerHTML = `
+          <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-brand-500/10 border border-brand-500/20 text-xs md:text-base text-brand-400 font-bold shadow-[0_0_20px_rgba(59,130,246,0.08)]">
+            <span class="w-3 h-3 rounded-full bg-brand-400 animate-ping"></span>
+            <span>Playing <strong>${activities[0].name}</strong></span>
+          </div>
+        `;
+        badgeEl.classList.remove("hidden");
+      }
+    }
+
+    getDiscordPresence();
+    setInterval(getDiscordPresence, 15000);
+
+    // ================= SCROLL REVEAL & NAVIGATION =================
+    const options = {
+      threshold: 0.1,
+      rootMargin: "0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    }, options);
+
+    document.querySelectorAll(".reveal").forEach(sec => {
+      observer.observe(sec);
+    });
+
+    // Helper function to find element absolute top statically (independent of CSS transforms)
+    function getAbsoluteTop(element) {
+      let top = 0;
+      while (element) {
+        top += element.offsetTop;
+        element = element.offsetParent;
+      }
+      return top;
+    }
+
+    // Active Link Tracking
+    const sections = document.querySelectorAll("section");
+    const links = document.querySelectorAll("[data-link]");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollY <= 80) {
+        current = "home";
+      } else if (scrollY >= maxScroll - 80) {
+        current = "socials";
+      } else {
+        let minDistance = Infinity;
+        const viewportCenter = scrollY + (window.innerHeight / 2);
+
+        sections.forEach(sec => {
+          const top = getAbsoluteTop(sec);
+          const height = sec.offsetHeight;
+          const center = top + (height / 2);
+          const distance = Math.abs(viewportCenter - center);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            current = sec.getAttribute("id");
+          }
+        });
+      }
+
+      links.forEach(lnk => {
+        lnk.classList.remove("active");
+        if (lnk.getAttribute("data-link") === current) {
+          lnk.classList.add("active");
+        }
+      });
+    });
+
+    // ================= SMOOTH SCROLL (Lenis) =================
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Smooth Scroll clicks via Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(lnk => {
+      lnk.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = lnk.getAttribute("href");
+        if (target === "#home") {
+          lenis.scrollTo(0, { offset: 0, duration: 1.2 });
+        } else {
+          // Adjust scroll offset to prevent titles from being cut off under navbar
+          lenis.scrollTo(target, { offset: -140, duration: 1.2 });
+        }
+      });
+    });
+
+    // ================= CUSTOM GLOWING CROSSHAIR CURSOR =================
+    const cursor = document.getElementById("custom-cursor");
+    if (cursor) {
+      window.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+
+      // Hover states for links
+      document.querySelectorAll("a, button, [role='button']").forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          cursor.classList.add("scale-125");
+          cursor.querySelectorAll(".bg-brand-400").forEach(line => {
+            line.classList.replace("bg-brand-400", "bg-cyan-400");
+            line.classList.replace("shadow-[0_0_8px_#3b82f6]", "shadow-[0_0_12px_#22d3ee]");
+          });
+        });
+        item.addEventListener("mouseleave", () => {
+          cursor.classList.remove("scale-125");
+          cursor.querySelectorAll(".bg-cyan-400").forEach(line => {
+            line.classList.replace("bg-cyan-400", "bg-brand-400");
+            line.classList.replace("shadow-[0_0_12px_#22d3ee]", "shadow-[0_0_8px_#3b82f6]");
+          });
+        });
+      });
+    }
+
+    // Init Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "ryouta-profile",
+  "version": "1.0.0",
+  "description": "Personal Space & Portfolio for Ryouta",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
